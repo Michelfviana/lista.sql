@@ -44,53 +44,54 @@ SELECT * FROM vendedores WHERE nome LIKE '_a%';
 -- ORDER BY
 
 -- Listar todos os vendedores ordenados por nome
-
+SELECT * FROM vendedores ORDER BY nome;
 -- Listar todos os vendedores ordenados por nome de forma descrescente
-
+SELECT * FROM vendedores ORDER BY nome DESC;
 -- Listar todos os vendedores ordenados por nome e salario 
-
+SELECT *  FROM vendedores ORDER BY nome, salario;
 -- Listar todos os clientes com seus estados, sendo que o estado deverá ser ordenado em ordem crescente e o nome por ordem descrescente
-
+SELECT * FROM clientes ORDER BY uf ASC, nome DESC;
 -- Listar todos os vendedores que ganham MENOS de 1000 reais e apresentar em ordem crescente
-
+SELECT * FROM vendedores WHERE salario < 1000 ORDER BY salario ASC;
 -- Listar os vendedores que não começam por ‘Jo’ e apresentar ordenado de forma descrescente
-
+SELECT * FROM vendedores WHERE nome NOT LIKE 'Jo%' ORDER BY nome DESC;
 -- FUNÇÕES COUNT(), AVG(), SUM(), MIN() e MAX()
 
 -- Informe quantos clientes foram cadastrados
-
+SELECT COUNT(*) FROM clientes;
 -- Informe quantos produtos tem valor unitário abaixo de 0.50 centavos
-
+SELECT COUNT(*) FROM produtos WHERE valor_unitario < 0.50;
 -- Informe a média de salario dos vendedores
-
+SELECT AVG(salario) FROM vendedores;
 -- Informe a média de valores unitarios dos produtos vendidos a M
-
+SELECT AVG(valor_unitario) FROM produtos WHERE unidade = 'M';
 -- Somar o valor de todos os salários
-
+SELECT SUM(salario) FROM vendedores;
 -- Somar o valor dos salarios da comissão A
-
+SELECT SUM(faixa_comissao) FROM vendedores WHERE faixa_comissao = 'A';
 -- Somar a quantidade de itens de pedidos
-
+SELECT SUM(quantidade) FROM itens_pedido;
 -- Informe o menor salario do vendedores
-
+SELECT MIN(salario) FROM vendedores;
 -- Informe o maior salario do vendedores
-
+SELECT MAX(salario) FROM vendedores;
 -- Informe o maior salario do vendedores da faixa de comissão B
-
+SELECT MAX(salario) FROM vendedores WHERE faixa_comissao = 'B';
 -- Listar os nomes entre Ana e Jorge, ordenado de forma descrescente
-
+SELECT nome FROM clientes WHERE nome BETWEEN 'Ana' AND 'Jorge' ORDER BY nome DESC;
 
 -- GROUP BY
 
 -- Informe o número de clientes por Estado
-
+SELECT uf, COUNT(*) FROM clientes GROUP BY uf;
 -- Informe a média salarial por faixa de comissão
-
+SELECT faixa_comissao, AVG(salario) FROM vendedores GROUP BY faixa_comissao;
 -- Informe a média salarial por faixa de comissão ordenado de forma descrescente por valor
-
+SELECT faixa_comissao, AVG(salario) FROM vendedores GROUP BY faixa_comissao ORDER BY AVG(salario) DESC;
 
 -- HAVING
 
 -- Informe a média salarial por faixa de comissão apenas das faixas com ganho acima de 2000 
-
+SELECT faixa_comissao, AVG(salario) FROM vendedores GROUP BY faixa_comissao HAVING AVG(salario) > 2000;
 -- Informe a média salarial por faixa de comissão apenas das faixas com ganho acima de 2000 ordenado de forma descrescente por valor
+SELECT faixa_comissao, AVG(salario) FROM vendedores GROUP BY faixa_comissao HAVING AVG(salario) > 2000 ORDER BY AVG(salario) DESC;
